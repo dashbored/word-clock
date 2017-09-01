@@ -13,6 +13,8 @@ etc.
 
 Hardware used:
 
-Arduino UNO
-DC3231
+Arduino UNO 
+
+DC3231 
+
 IKEA RIBBA 52x52
