@@ -30,8 +30,8 @@
 RTC_DS3231 rtc;           // Easier command for the Real Time Clock (RTC).
 
 #define LED_PIN 6         // Using digital out pin 6 as the data pin for the LED strip.
-#define LED_QUANTITY 143  // Right now only 143, should be 144 (12x12) + four minute LEDs.
-#define BRIGHTNESS 50     // Brightness of the LED's, fixed for now, will be dynamic later.
+#define LED_QUANTITY 144  // Right now only 143, should be 144 (12x12) + four minute LEDs.
+#define BRIGHTNESS 80     // Brightness of the LED's, fixed for now, will be dynamic later.
 
 int pixel[LED_QUANTITY];   // Array used in function theTime() to light LEDS.
 
@@ -60,9 +60,8 @@ void setup() {
   strip.begin();                        // Start the LED strip.
   strip.setBrightness(BRIGHTNESS);      // Set the brightness of the strip.
   
-  strip.show();                         // Push update to strip.
-
   colorWipe(strip.Color(0, 0, 0), 50);  // Start all pixels as off.
+  strip.show();                         // Push update to strip.  
 }
 
 void loop() {
@@ -70,6 +69,7 @@ void loop() {
   theTime();
 }
 
+// Wipes all LED to specific color, used as initializer.
 void colorWipe(uint32_t c, uint8_t wait) {
   for(uint16_t i=0; i<strip.numPixels(); i++) {
     strip.setPixelColor(i, c);
@@ -77,3 +77,14 @@ void colorWipe(uint32_t c, uint8_t wait) {
     delay(wait);
   }
 }
+//
+//// Adds one hour to the time when the button is pressed
+//void addHour()  {
+//  NULL;
+//}
+//
+//// Adds one minute to the time when the button is pressed
+//void addMinute()  {
+//  NULL;
+//}
+
