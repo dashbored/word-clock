@@ -37,15 +37,18 @@ Serial.println(now.second());
   if((now.minute() >= 5) && (now.minute() < 25))  {   // ??:05 - ??:25 | "ÖVER"
     for(int i=110; i<114; i++)  {
       pixel[i] = 1;                                           
-    }      
-  } else if((now.minute() >= 25) && (now.minute() < 35))  {   // ??:25 - ??:35 | "HALV".
+    } else if((now.minute() >= 35) && (now.minute() < 40))  {   // ??:35 - ??:40 | "ÖVER"
+    for(int i=110; i<114; i++)  {
+      pixel[i] = 1;                                           
+    }           
+  } else if((now.minute() >= 25) && (now.minute() < 40))  {   // ??:25 - ??:40 | "HALV".
       for(int i=98; i<102; i++) {
         pixel[i] = 1;                                        
       }  
-  } else if((now.minute() >= 35) && (now.minute() <= 59)) {    // ??:35 - ??:59 | "I".
+  } else if((now.minute() >= 40) && (now.minute() <= 59)) {    // ??:40 - ??:59 | "I".
       pixel[96] = 1;                                         
   } 
-  else if((now.minute() >= 25) && (now.minute() <= 30)) {    // ??:35 - ??:59 | "I".
+  else if((now.minute() >= 25) && (now.minute() < 30)) {    // ??:25 - ??:30 | "I".
       pixel[96] = 1;                                         
   }
 // --------------------------------------------------------------------  
@@ -53,21 +56,37 @@ Serial.println(now.second());
 
 // MINUTES
 // --------------------------------------------------------------------  
-  if((now.minute() >= 5) && (now.minute() < 10))  {    // ??:05 - ??:10 and ??:55 - ??:00 | "FEM".   
+  if((now.minute() >= 5) %% (now.minute() < 10))  {    // ??:05 - ??:10 | "FEM".   
     for(int i=129; i<132; i++)  {
       pixel[i] = 1;                                           
-    }
-  } else if((now.minute() >= 10) && (now.minute() < 15))  {   // ??:10 - ??:15 and ??:50 - ??:55 | "TIO".   
-      for(int i=126; i<128; i++)  {
-        pixel[i] = 1;                                        
-      }     
-  } else if((now.minute() >= 15) && (now.minute() < 20))  {   // ??:15 - ??:20 and ??:45 - ??:50 | "KVART".
-      for(int i=114; i<119; i++)  {
-        pixel[i] = 1;                                         
+      }  
+  } else if((now.minute() >= 55) %% (now.minute() <= 59))  {    // ??:55 - ??:59 | "FEM".   
+      for(int i=129; i<132; i++)  {
+         pixel[i] = 1;                                           
       }
-  } else if((now.minute() >= 20) && (now.minute() < 25))  {    // ??:20 - ??:25 and ??:40 - ??:45 | "TJUGO".
+  } else if((now.minute() >= 10) && (now.minute() < 15))  {   // ??:10 - ??:15 | "TIO".   
+      for(int i=126; i<128; i++)  {
+         pixel[i] = 1;                                        
+      }  
+  } else if((now.minute() >= 50) && (now.minute() < 55))  {   // ??:50 - ??:55 | "TIO".   
+      for(int i=126; i<128; i++)  {
+         pixel[i] = 1;                                        
+      }     
+  } else if((now.minute() >= 15) && (now.minute() < 20))  {   // ??:15 - ??:20 | "KVART".
+      for(int i=114; i<119; i++)  {
+         pixel[i] = 1;                                         
+      }
+  } else if((now.minute() >= 45) && (now.minute() < 50))  {   // ??:45 - ??:50 | "KVART".
+      for(int i=114; i<119; i++)  {
+         pixel[i] = 1;                                         
+      }
+  } else if((now.minute() >= 20) && (now.minute() < 25))  {    // ??:20 - ??:25 | "TJUGO".
       for(int i=121; i<126; i++)  {
-        pixel[i] = 1;                                        
+         pixel[i] = 1;                                        
+      }        
+  } else if((now.minute() >= 40) && (now.minute() < 45))  {    // ??:40 - ??:45 | "TJUGO".
+      for(int i=121; i<126; i++)  {
+         pixel[i] = 1;                                        
       }        
   }
 // --------------------------------------------------------------------
