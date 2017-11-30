@@ -2,6 +2,8 @@
 
 Word clock ver. 1
 
+ONGOING PROJECT, CHECK STATUS: https://imgur.com/a/CMrTL
+
 A word clock DIY project inspired by projects like:
 
 http://www.instructables.com/id/Tinkers-Word-Clock-REVISITED-NOW-110-More-AWESOME-/
