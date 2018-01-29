@@ -113,99 +113,99 @@ Serial.println(now.second());
 
 //HOURS
 // --------------------------------------------------------------------
-  if((hour == 1 && minute < 30) || (hour == 13 && minute < 30)) {   // 01:00 - 01:29 and 13:00 - 01:29 | "ETT".
+  if((hour == 1 && minute < 25) || (hour == 13 && minute < 25)) {   // 01:00 - 01:24 and 13:00 - 01:24 | "ETT".
     for(int i=76; i<79; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 0 && minute >= 30) || (hour == 12 && minute >= 30)) {   // 00:30 - 01:00 and 12:30 - 13:00 | "ETT".
+  } else if((hour == 0 && minute >= 25) || (hour == 12 && minute >= 25)) {   // 00:25 - 01:00 and 12:25 - 13:00 | "ETT".
     for(int i=76; i<79; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 2 && minute < 30) || (hour == 14 && minute < 30)) {   // 02:00 - 02:29 and 14:00 - 14:29 | "TVÅ".
+  } else if((hour == 2 && minute < 25) || (hour == 14 && minute < 25)) {   // 02:00 - 02:24 and 14:00 - 14:24 | "TVÅ".
     for(int i=80; i<83; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 1 && minute >= 30) || (hour == 13 && minute >= 30)) {   // 01:30 - 02:00 and 13:30 - 14:00 | "TVÅ".
+  } else if((hour == 1 && minute >= 25) || (hour == 13 && minute >= 25)) {   // 01:25 - 02:00 and 13:25 - 14:00 | "TVÅ".
     for(int i=80; i<83; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 3 && minute < 30) || (hour == 15 && minute < 30)) {   // 03:00 - 03:29 and 15:00 - 15:29 | "TRE".
+  } else if((hour == 3 && minute < 25) || (hour == 15 && minute < 25)) {   // 03:00 - 03:24 and 15:00 - 15:24 | "TRE".
     for(int i=57; i<60; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 2 && minute >= 30) || (hour == 14 && minute >= 30)) {   // 02:30 - 03:00 and 14:30 - 15:00 | "TRE".
+  } else if((hour == 2 && minute >= 25) || (hour == 14 && minute >= 25)) {   // 02:25 - 03:00 and 14:25 - 15:00 | "TRE".
     for(int i=57; i<60; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 4 && minute < 30) || (hour == 16 && minute < 30)) {   // 04:00 - 04:29 and 16:00 - 16:29 | "FYRA".
+  } else if((hour == 4 && minute < 25) || (hour == 16 && minute < 25)) {   // 04:00 - 04:24 and 16:00 - 16:24 | "FYRA".
     for(int i=88; i<92; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 3 && minute >= 30) || (hour == 15 && minute >= 30)) {   // 03:30 - 04:00 and 15:30 - 16:00 | "FYRA".
+  } else if((hour == 3 && minute >= 25) || (hour == 15 && minute >= 25)) {   // 03:25 - 04:00 and 15:25 - 16:00 | "FYRA".
     for(int i=88; i<92; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 5 && minute < 30) || (hour == 17 && minute < 30)) {   // 05:00 - 05:29 and 17:00 - 17:29 | "FEM".
+  } else if((hour == 5 && minute < 25) || (hour == 17 && minute < 25)) {   // 05:00 - 05:24 and 17:00 - 17:24 | "FEM".
     for(int i=48; i<51; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 4 && minute >= 30) || (hour == 16 && minute >= 30)) {   // 04:30 - 05:00 and 16:30 - 17:00 | "FEM".
+  } else if((hour == 4 && minute >= 25) || (hour == 16 && minute >= 25)) {   // 04:25 - 05:00 and 16:25 - 17:00 | "FEM".
     for(int i=48; i<51; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 6 && minute < 30) || (hour == 18 && minute < 30)) {   // 06:00 - 06:29 and 18:00 - 18:29 | "SEX".
+  } else if((hour == 6 && minute < 25) || (hour == 18 && minute < 25)) {   // 06:00 - 06:24 and 18:00 - 18:24 | "SEX".
     for(int i=62; i<65; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 5 && minute >= 30) || (hour == 17 && minute >= 30)) {   // 05:30 - 06:00 and 17:30 - 18:00 | "SEX".
+  } else if((hour == 5 && minute >= 25) || (hour == 17 && minute >= 25)) {   // 05:25 - 06:00 and 17:25 - 18:00 | "SEX".
     for(int i=62; i<65; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 7 && minute < 30) || (hour == 19 && minute < 30)) {   // 07:00 - 07:29 and 19:00 - 19:29 | "SJU".
+  } else if((hour == 7 && minute < 25) || (hour == 19 && minute < 25)) {   // 07:00 - 07:24 and 19:00 - 19:24 | "SJU".
     for(int i=51; i<54; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 6 && minute >= 30) || (hour == 18 && minute >= 30)) {   // 06:30 - 07:00 and 18:30 - 19:00 | "SJU".
+  } else if((hour == 6 && minute >= 25) || (hour == 18 && minute >= 25)) {   // 06:25 - 07:00 and 18:25 - 19:00 | "SJU".
     for(int i=51; i<54; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 8 && minute < 30) || (hour == 20 && minute < 30)) {   // 08:00 - 08:29 and 20:00 - 20:29 | "ÅTTA".
+  } else if((hour == 8 && minute < 25) || (hour == 20 && minute < 25)) {   // 08:00 - 08:24 and 20:00 - 20:24 | "ÅTTA".
     for(int i=92; i<96; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 7 && minute >= 30) || (hour == 19 && minute >= 30)) {   // 07:30 - 08:00 and 19:30 - 20:00 | "ÅTTA".
+  } else if((hour == 7 && minute >= 25) || (hour == 19 && minute >= 25)) {   // 07:25 - 08:00 and 19:25 - 20:00 | "ÅTTA".
     for(int i=92; i<96; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 9 && minute < 30) || (hour == 21 && minute < 30)) {   // 09:00 - 09:29 and 21:00 - 21:29 | "NIO".
+  } else if((hour == 9 && minute < 25) || (hour == 21 && minute < 25)) {   // 09:00 - 09:24 and 21:00 - 21:24 | "NIO".
     for(int i=72; i<75; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 8 && minute >= 30) || (hour == 20 && minute >= 30)) {   // 08:30 - 09:00 and 20:30 - 21:00 | "NIO".
+  } else if((hour == 8 && minute >= 25) || (hour == 20 && minute >= 25)) {   // 08:25 - 09:00 and 20:25 - 21:00 | "NIO".
     for(int i=72; i<75; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 10 && minute < 30) || (hour == 22 && minute < 30)) {   // 10:00 - 10:29 and 22:00 - 22:29 | "TIO".
+  } else if((hour == 10 && minute < 25) || (hour == 22 && minute < 25)) {   // 10:00 - 10:24 and 22:00 - 22:24 | "TIO".
     for(int i=54; i<57; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 9 && minute >= 30) || (hour == 21 && minute >= 30)) {   // 09:30 - 10:00 and 21:30 - 22:00 | "TIO".
+  } else if((hour == 9 && minute >= 25) || (hour == 21 && minute >= 25)) {   // 09:25 - 10:00 and 21:25 - 22:00 | "TIO".
     for(int i=54; i<57; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 11 && minute < 30) || (hour == 23 && minute < 30)) {   // 11:00 - 11:29 and 23:00 - 23:29 | "ELVA".
+  } else if((hour == 11 && minute < 25) || (hour == 23 && minute < 25)) {   // 11:00 - 11:24 and 23:00 - 23:24 | "ELVA".
     for(int i=84; i<88; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 10 && minute >= 30) || (hour == 22 && minute >= 30)) {   // 10:30 - 11:00 and 22:30 - 23:00 | "ELVA".
+  } else if((hour == 10 && minute >= 25) || (hour == 22 && minute >= 25)) {   // 10:25 - 11:00 and 22:25 - 23:00 | "ELVA".
     for(int i=84; i<88; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 12 && minute < 30) || (hour == 0 && minute < 30)) {   // 12:00 - 12:29 and 00:00 - 00:29 | "TOLV".
+  } else if((hour == 12 && minute < 25) || (hour == 0 && minute < 25)) {   // 12:00 - 12:24 and 00:00 - 00:24 | "TOLV".
     for(int i=66; i<70; i++)  {
       pixel[i] = 1;
     }
-  } else if((hour == 11 && minute >= 30) || (hour == 23 && minute >= 30)) {   // 11:30 - 12:00 and 23:30 - 00:00 | "TOLV".
+  } else if((hour == 11 && minute >= 25) || (hour == 23 && minute >= 25)) {   // 11:25 - 12:00 and 23:25 - 00:00 | "TOLV".
     for(int i=66; i<70; i++)  {
       pixel[i] = 1;
     }

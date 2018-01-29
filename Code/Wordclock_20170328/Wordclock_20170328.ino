@@ -31,7 +31,7 @@ RTC_DS3231 rtc;           // Easier command for the Real Time Clock (RTC).
 
 #define LED_PIN 6         // Using digital out pin 6 as the data pin for the LED strip.
 #define LED_QUANTITY 144  // Right now only 143, should be 144 (12x12) + four minute LEDs.
-#define BRIGHTNESS 80     // Brightness of the LED's, fixed for now, will be dynamic later.
+#define BRIGHTNESS 99     // Brightness of the LED's, fixed for now, will be dynamic later.
 #define HOUR 7            // Using digital pin 7 as input for hour button.
 #define MINUTE 8            // Using digital pin 8 as input for minute button.
 
