@@ -33,23 +33,24 @@ RTC_DS3231 rtc;           // Easier command for the Real Time Clock (RTC).
 #define LED_QUANTITY 144  // Right now only 143, should be 144 (12x12) + four minute LEDs.
 #define BRIGHTNESS 99     // Brightness of the LED's, fixed for now, will be dynamic later.
 #define HOUR 7            // Using digital pin 7 as input for hour button.
-#define MINUTE 8            // Using digital pin 8 as input for minute button.
+#define MINUTE 8          // Using digital pin 8 as input for minute button.
+#define MAX_HOUR 24       // 24 is always 0
+#define MAX_MINUTE 60
 
 int pixel[LED_QUANTITY];   // Array used in function theTime() to light LEDS.
-int hour_holder = 0;                  // Variable to check how many times the hour button is pressed.
-int minute_holder = 0;                // Variable to check how many times the minute button is pressed.  
-int hour_test = 0;
+int hourAdjust = 0;       // Variable to check how many times the hour button is pressed.
+int minuteAdjust = 0;     // Variable to check how many times the minute button is pressed.  
+
 
 // Variables will change:
-int ledState = HIGH;         // the current state of the output pin
-int buttonState;             // the current reading from the input pin
-int lastButtonState = LOW;   // the previous reading from the input pin
+int buttonState[13] = {LOW};        // One for every digital pin
+unsigned long lastDebounceTime[13] = {0}; // One for every digital pin
+unsigned long holdTime[13] = {0}; // One for every digital pin
 
 // the following variables are unsigned longs because the time, measured in
 // milliseconds, will quickly become a bigger number than can be stored in an int.
-unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
 unsigned long debounceDelay = 50;    // the debounce time; increase if the output flickers
-
+unsigned long holdDelay = 500;      // Interval registering for holding the hour/minute button
 
 /*   
  *    %%%%%        FROM ADAFRUIT NEOPIXEL TUTORIAL INSTRUCTIONS        %%%%%
@@ -67,7 +68,6 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_QUANTITY, LED_PIN, NEO_GRB + NEO
 
 
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(9600);                   // Begin Serial Monitor.
   Wire.begin();                         // Begin I2C.
   rtc.begin();                          // Begin Real Time Clock (DS3231).
@@ -86,26 +86,23 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
  
-  if(digitalRead(HOUR) == HIGH) {
-    hour_test = 1;
+  if(debouncer(HOUR)) {
+     Serial.println("add hour");
     addHour();
-    delay(200);
   }
-  
-  if(digitalRead(MINUTE) == HIGH) {
-    hour_test = 2; 
+
+  if(debouncer(MINUTE)) {
+    Serial.println("add minute");
     addMinute();
-    //debouncer(hour_test);
-    delay(200);
   }
 
-//  Serial.print("Current hour and minute holder: ");
-//  Serial.print(hour_holder);
-//  Serial.print(", ");
-//  Serial.println(minute_holder);
-theTime(hour_holder, minute_holder);
+  if(buttonState[HOUR] && buttonState[MINUTE]) {
+    Serial.println("reset");
+    reset();
+  }
 
 
+ theTime(hour_holder, minute_holder);
 }
 
 // Wipes all LED to specific color, used as initializer.
@@ -117,14 +114,22 @@ void colorWipe(uint32_t c, uint8_t wait) {
   }
 }
 
+// RESET
+// --------------------------------------------------------------------
+// Resets the hour_holder and minute_holder
+void reset() {
+  hourAdjust = MAX_HOUR - rtc.now().hour();
+  minuteAdjust = MAX_MINUTE - rtc.now().minute();
+}
+
 
 // ADD HOUR TO TIME
 // --------------------------------------------------------------------
 // Adds one hour to the time when the button is pressed
 void addHour()  {
-  hour_holder = hour_holder + 1;
-  if (hour_holder > 23) {
-    hour_holder = 0;
+  hourAdjust = hourAdjust + 1;
+  if (hourAdjust > 23) {
+    hourAdjust = 0;
   }
 }
 // --------------------------------------------------------------------
@@ -133,9 +138,9 @@ void addHour()  {
 // --------------------------------------------------------------------
 // Adds one minute to the time when the button is pressed
 void addMinute()  {
-  minute_holder = minute_holder + 1;
-  if (minute_holder > 59) {
-    minute_holder = 0;
+  minuteAdjust = minuteAdjust + 1;
+  if (minuteAdjust > 59) {
+    minuteAdjust = 0;
     addHour();
   }
 }
@@ -143,44 +148,27 @@ void addMinute()  {
 
 // DEBOUNCER
 // -----------------------------
-//
-//void debouncer(int hour_test) {
-//  // read the state of the switch into a local variable:
-//  int reading = digitalRead(HOUR);
-//
-//  // check to see if you just pressed the button
-//  // (i.e. the input went from LOW to HIGH), and you've waited long enough
-//  // since the last press to ignore any noise:
-//
-//  // If the switch changed, due to noise or pressing:
-//  if (reading != lastButtonState) {
-//    // reset the debouncing timer
-//    lastDebounceTime = millis();
-//  }
-//
-//  if ((millis() - lastDebounceTime) > debounceDelay) {
-//    // whatever the reading is at, it's been there for longer than the debounce
-//    // delay, so take it as the actual current state:
-//
-//    // if the button state has changed:
-//    if (reading != buttonState) {
-//      buttonState = reading;
-//
-//      // only toggle the LED if the new button state is HIGH
-//      if (buttonState == HIGH) {
-//        ledState = !ledState;
-//      }
-//    }
-//  }
 
-//  // set the LED:
-//  digitalWrite(ledPin, ledState);
-//if(hour_test == 1){
-//  addHour();
-//} else if (hour_test == 2) {
-//  addMinute();
-//}
-//  // save the reading. Next time through the loop, it'll be the lastButtonState:
-//  lastButtonState = reading;
-//}
+bool debouncer(int pin) {
+ // read the state of the switch into a local variable:
+ int reading = digitalRead(pin);
+
+ // If the switch changed, due to noise or pressing:
+ if (reading != buttonState[pin]) {
+   // reset the debouncing timer
+   buttonState[pin] = reading;
+   holdTime[pin] = millis();
+   lastDebounceTime[pin] = millis();   
+ }
+
+  // only toggle the LED if the new button state is HIGH
+  if ((millis() - holdTime[pin]) > holdDelay && buttonState[pin] == HIGH) {
+     lastDebounceTime[pin] = millis();
+     holdTime[pin] = millis();
+    return true;
+  }
+
+ return false;
+}
+
 

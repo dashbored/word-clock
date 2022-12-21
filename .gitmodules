@@ -1,0 +1,9 @@
+[submodule "Code/dependencies/RTClib"]
+	path = Code/dependencies/RTClib
+	url = https://github.com/adafruit/RTClib.git
+[submodule "Code/dependencies/NeoPixel"]
+	path = Code/dependencies/NeoPixel
+	url = https://github.com/adafruit/Adafruit_NeoPixel.git
+[submodule "Code/dependencies/NeoMatrix"]
+	path = Code/dependencies/NeoMatrix
+	url = https://github.com/adafruit/Adafruit_NeoMatrix.git
